@@ -6,6 +6,7 @@ var isPlainObject = require('lodash').isPlainObject;
 var isString = require('lodash').isString;
 var isNumber = require('lodash').isNumber;
 var isBoolean = require('lodash').isBoolean;
+var round = require('lodash').round;
 var rgbHex = require('rgb-hex');
 var shortHexColor = require('shorten-css-hex');
 var parseColor = require('parse-color');
@@ -16,14 +17,14 @@ function isColor ( value ) {
 	return typeof parseColor(value).rgba !== 'undefined';
 }
 
-function getJsonValueFromSassValue ( value ) {
+function getJsonValueFromSassValue ( value, opts ) {
 	var resolvedValue = null;
 	var rgbValue = [];
 	var alphaValue;
 	if ( value instanceof types.List ) {
-		resolvedValue = listToArray(value);
+		resolvedValue = listToArray(value, opts);
 	} else if ( value instanceof types.Map ) {
-		resolvedValue = mapToObject(value);
+		resolvedValue = mapToObject(value, opts);
 	} else if ( value instanceof types.Color ) {
 		rgbValue = [value.getR(), value.getG(), value.getB()];
 		alphaValue = value.getA();
@@ -34,9 +35,9 @@ function getJsonValueFromSassValue ( value ) {
 		}
 	} else if ( value instanceof types.Number ) {
 		if ( value.getUnit() !== '' ) {
-			resolvedValue = String(Number(value.getValue()) + value.getUnit());
+			resolvedValue = String(round(Number(value.getValue()), opts.precision) + value.getUnit());
 		} else {
-			resolvedValue = Number(value.getValue());
+			resolvedValue = round(Number(value.getValue()), opts.precision);
 		}
 	} else if ( !(value instanceof types.Null) ) {
 		resolvedValue = value.getValue();
@@ -98,24 +99,24 @@ function objectToMap ( obj ) {
 	return data;
 }
 
-function listToArray ( list ) {
+function listToArray ( list, opts ) {
 	var length = list.getLength();
 	var data = [];
 	var value;
 	for ( let i = 0; i < length; i++ ) {
-		value = getJsonValueFromSassValue(list.getValue(i));
+		value = getJsonValueFromSassValue(list.getValue(i), opts);
 		data.push(value);
 	}
 	return data;
 }
 
-function mapToObject ( map ) {
+function mapToObject ( map, opts ) {
 	var length = map.getLength();
 	var data = {};
 	var key, value;
 	for ( let i = 0; i < length; i++ ) {
 		key = map.getKey(i).getValue();
-		value = getJsonValueFromSassValue(map.getValue(i));
+		value = getJsonValueFromSassValue(map.getValue(i), opts);
 		data[key] = value;
 	}
 	return data;
@@ -129,7 +130,7 @@ function mapToObject ( map ) {
  */
 function encode ( value, quotes ) {
 	var shouldQuote = quotes.getValue();
-	var resolvedValue = JSON.stringify(getJsonValueFromSassValue(value));
+	var resolvedValue = JSON.stringify(getJsonValueFromSassValue(value, { precision: this.options.precision }));
 	if ( shouldQuote ) {
 		resolvedValue = `'${resolvedValue}'`;
 	}
