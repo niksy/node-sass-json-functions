@@ -9,6 +9,7 @@ var isBoolean = require('lodash').isBoolean;
 var rgbHex = require('rgb-hex');
 var shortHexColor = require('shorten-css-hex');
 var parseColor = require('parse-color');
+var parseUnit = require('parse-css-dimension');
 var types = sass.types;
 
 function isColor ( value ) {
@@ -31,6 +32,12 @@ function getJsonValueFromSassValue ( value ) {
 		} else {
 			resolvedValue = `rgba(${rgbValue.join(',')},${alphaValue})`;
 		}
+	} else if ( value instanceof types.Number ) {
+		if ( value.getUnit() !== '' ) {
+			resolvedValue = String(Number(value.getValue()) + value.getUnit());
+		} else {
+			resolvedValue = Number(value.getValue());
+		}
 	} else if ( !(value instanceof types.Null) ) {
 		resolvedValue = value.getValue();
 	}
@@ -39,7 +46,7 @@ function getJsonValueFromSassValue ( value ) {
 
 function setJsonValueToSassValue ( value ) {
 	var resolvedValue = types.Null.NULL;
-	var resolvedColorValue;
+	var resolvedColorValue, resolvedUnitValue;
 	if ( isArray(value) ) {
 		resolvedValue = arrayToList(value);
 	} else if ( isPlainObject(value) ) {
@@ -48,7 +55,18 @@ function setJsonValueToSassValue ( value ) {
 		resolvedColorValue = parseColor(value).rgba;
 		resolvedValue = new types.Color(resolvedColorValue[0], resolvedColorValue[1], resolvedColorValue[2], resolvedColorValue[3]);
 	} else if ( isString(value) ) {
-		resolvedValue = new types.String(value);
+		try {
+			resolvedUnitValue = parseUnit(value);
+			if ( resolvedUnitValue.type === 'length' ) {
+				resolvedValue = new types.Number(resolvedUnitValue.value, resolvedUnitValue.unit);
+			} else if ( resolvedUnitValue.type === 'percentage' ) {
+				resolvedValue = new types.Number(resolvedUnitValue.value, '%');
+			} else {
+				resolvedValue = new types.String(resolvedUnitValue.value);
+			}
+		} catch ( e ) {
+			resolvedValue = new types.String(value);
+		}
 	} else if ( isNumber(value) ) {
 		resolvedValue = new types.Number(value);
 	} else if ( isBoolean(value) ) {
