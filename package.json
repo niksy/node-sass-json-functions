@@ -1,0 +1,48 @@
+{
+  "name": "node-sass-json-functions",
+  "version": "0.0.0",
+  "description": "JSON encode and decode functions for node-sass.",
+  "main": "index.js",
+  "author": "Ivan Nikolić <niksy5@gmail.com> (http://ivannikolic.com)",
+  "license": "MIT",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "eslint {index,test/**/*}.js && istanbul cover _mocha test/**/*.js && istanbul check-coverage"
+  },
+  "dependencies": {
+    "lodash": "^4.15.0",
+    "node-sass": "^3.8.0",
+    "parse-color": "^1.0.0",
+    "rgb-hex": "^1.0.0",
+    "shorten-css-hex": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.1.1",
+    "eslint-config-niksy": "^3.0.1",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.5.3",
+    "sass-true": "^2.1.3"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "keywords": [
+    "decode",
+    "encode",
+    "functions",
+    "json",
+    "node",
+    "node-sass",
+    "sass"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/niksy/node-sass-json-functions.git"
+  },
+  "bugs": {
+    "url": "https://github.com/niksy/node-sass-json-functions/issues"
+  },
+  "homepage": "https://github.com/niksy/node-sass-json-functions#readme"
+}
