@@ -15,7 +15,7 @@ function isColor ( value ) {
 	return typeof parseColor(value).rgba !== 'undefined';
 }
 
-function getValueFromSass ( value ) {
+function getJsonValueFromSassValue ( value ) {
 	var resolvedValue = null;
 	var rgbValue = [];
 	var alphaValue;
@@ -37,7 +37,7 @@ function getValueFromSass ( value ) {
 	return resolvedValue;
 }
 
-function setValueToSass ( value ) {
+function setJsonValueToSassValue ( value ) {
 	var resolvedValue = types.Null.NULL;
 	var resolvedColorValue;
 	if ( isArray(value) ) {
@@ -61,7 +61,7 @@ function arrayToList ( arr ) {
 	var length = arr.length;
 	var data = new types.List(length);
 	for ( let i = 0; i < length; i++ ) {
-		data.setValue(i, setValueToSass(arr[i]));
+		data.setValue(i, setJsonValueToSassValue(arr[i]));
 	}
 	return data;
 }
@@ -72,8 +72,8 @@ function objectToMap ( obj ) {
 	var i = 0;
 	for ( let prop in obj ) {
 		if ( obj.hasOwnProperty(prop) ) {
-			data.setKey(i, setValueToSass(prop));
-			data.setValue(i, setValueToSass(obj[prop]));
+			data.setKey(i, setJsonValueToSassValue(prop));
+			data.setValue(i, setJsonValueToSassValue(obj[prop]));
 			i++;
 		}
 	}
@@ -85,7 +85,7 @@ function listToArray ( list ) {
 	var data = [];
 	var value;
 	for ( let i = 0; i < length; i++ ) {
-		value = getValueFromSass(list.getValue(i));
+		value = getJsonValueFromSassValue(list.getValue(i));
 		data.push(value);
 	}
 	return data;
@@ -97,7 +97,7 @@ function mapToObject ( map ) {
 	var key, value;
 	for ( let i = 0; i < length; i++ ) {
 		key = map.getKey(i).getValue();
-		value = getValueFromSass(map.getValue(i));
+		value = getJsonValueFromSassValue(map.getValue(i));
 		data[key] = value;
 	}
 	return data;
@@ -111,7 +111,7 @@ function mapToObject ( map ) {
  */
 function encode ( value, quotes ) {
 	var shouldQuote = quotes.getValue();
-	var resolvedValue = JSON.stringify(getValueFromSass(value));
+	var resolvedValue = JSON.stringify(getJsonValueFromSassValue(value));
 	if ( shouldQuote ) {
 		resolvedValue = `'${resolvedValue}'`;
 	}
@@ -130,7 +130,7 @@ function decode ( value ) {
 	} catch ( e ) {
 		resolvedValue = null;
 	}
-	return setValueToSass(resolvedValue);
+	return setJsonValueToSassValue(resolvedValue);
 }
 
 module.exports.encode = encode;
