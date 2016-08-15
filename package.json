@@ -1,6 +1,6 @@
 {
   "name": "node-sass-json-functions",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "JSON encode and decode functions for node-sass.",
   "main": "index.js",
   "author": "Ivan Nikolić <niksy5@gmail.com> (http://ivannikolic.com)",
