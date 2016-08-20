@@ -9,7 +9,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "eslint {index,test/**/*}.js && istanbul cover _mocha test/**/*.js && istanbul check-coverage"
+    "test": "eslint {index,lib/**/*,test/**/*}.js && istanbul cover _mocha test/**/*.js && istanbul check-coverage"
   },
   "dependencies": {
     "lodash": "^4.15.0",
