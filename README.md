@@ -40,7 +40,7 @@ $map: (
 		foo: 11,
 		bar: 22,
 		baz: (
-			5, 4, 6, null, 1
+			5, 4, 6, null, 1, 1.23456789px
 		),
 		bag: "foo bar"
 	),
@@ -61,9 +61,9 @@ Output:
 ```css
 body {
 	content: '[1,2,"3",[4,5,6],{"foo":"bar baz"}]';
-	content: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
+	content: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23457px"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
 	content: [1,2,"3",[4,5,6],{"foo":"bar baz"}];
-	content: {"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"};
+	content: {"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23457px"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"};
 }
 ```
 
@@ -73,7 +73,7 @@ Input:
 
 ```scss
 $array: '[1,2,"3",[4,5,6],{"foo":"bar baz"}]';
-$object: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
+$object: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23456789px"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
 
 @debug json-decode($array);
 @debug json-decode($object);
@@ -83,7 +83,7 @@ Output:
 
 ```sh
 DEBUG: 1, 2, 3, 4, 5, 6, (foo: bar baz)
-DEBUG: (foo: 1, bar: 2, 3, baz: 3 3 3, bad: (foo: 11, bar: 22, baz: 5, 4, 6, null, 1, bag: foo bar), qux: rgba(255, 255, 255, 0.5), corgle: red)
+DEBUG: (foo: 1, bar: 2, 3, baz: 3 3 3, bad: (foo: 11, bar: 22, baz: 5, 4, 6, null, 1, 1.23456789px, bag: foo bar), qux: rgba(255, 255, 255, 0.5), corgle: red)
 ```
 
 ## API
