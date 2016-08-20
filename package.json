@@ -15,7 +15,7 @@
     "lodash": "^4.15.0",
     "node-sass": "^3.8.0",
     "parse-color": "^1.0.0",
-    "parse-css-dimension": "^1.0.1",
+    "parse-css-dimension": "^1.1.0",
     "rgb-hex": "^1.0.0",
     "shorten-css-hex": "^1.1.0"
   },

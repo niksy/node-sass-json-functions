@@ -58,7 +58,7 @@ function setJsonValueToSassValue ( value ) {
 	} else if ( isString(value) ) {
 		try {
 			resolvedUnitValue = parseUnit(value);
-			if ( resolvedUnitValue.type === 'length' ) {
+			if ( ['length', 'angle', 'resolution', 'frequency', 'time'].indexOf(resolvedUnitValue.type) !== -1 ) {
 				resolvedValue = new types.Number(resolvedUnitValue.value, resolvedUnitValue.unit);
 			} else if ( resolvedUnitValue.type === 'percentage' ) {
 				resolvedValue = new types.Number(resolvedUnitValue.value, '%');

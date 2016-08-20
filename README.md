@@ -103,8 +103,7 @@ Encodes (`JSON.stringify`) data and returns [Sass string][sass-string]. By defau
 
 #### data
 
-Type: `sass.types.*`  
-**Required**
+Type: `sass.types.*`
 
 Data to encode (stringify).
 
@@ -124,7 +123,7 @@ Decodes (`JSON.parse`) string and returns one of [available Sass types][sass-typ
 * Arrays are transformed to [Sass lists][sass-list]
 * Objects are transformed to [Sass maps][sass-map]
 * Anything properly parsed with [parse-color][parse-color] is transformed to [Sass color][sass-color]
-* Strings are transformed to [Sass strings][sass-string]
+* Strings are transformed to Sass numbers with units if they can be properly parsed with [parse-css-dimension][parse-css-dimension], otherwise they are transformed to [Sass strings][sass-string]
 * Numbers are transformed to Sass numbers
 * Null values and anything unresolved is transformed to Sass null values
 
@@ -147,3 +146,4 @@ MIT © [Ivan Nikolić](http://ivannikolic.com)
 [sass-color]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#colors
 [sass-string]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#sass-script-strings
 [parse-color]: https://github.com/substack/parse-color
+[parse-css-dimension]: https://github.com/jedmao/parse-css-dimension

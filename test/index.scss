@@ -4,10 +4,10 @@
 
 	@include test('should convert Sass list to JSON array') {
 
-		$list: 1, 2, "3", 4px, 42%, 1.23456789px, (4,5,6), (foo: "bar baz");
+		$list: 1, 2, "3", 4px, 42%, 1.23456789px, 1.23456789dppx, 1.23456789deg, (4,5,6), (foo: "bar baz");
 
 		$actual: json-encode($list);
-		$expected: '[1,2,"3","4px","42%","1.23457px",[4,5,6],{"foo":"bar baz"}]';
+		$expected: '[1,2,"3","4px","42%","1.23457px","1.23457dppx","1.23457deg",[4,5,6],{"foo":"bar baz"}]';
 
 		@include assert-equal($actual, $expected);
 	}
@@ -22,7 +22,7 @@
 				foo: 11,
 				bar: 22,
 				baz: (
-					5, 4, 6, null, 1, 1.23456789px
+					5, 4, 6, null, 1, 1.23456789px, 1.23456789dppx, 1.23456789deg
 				),
 				bag: "foo bar"
 			),
@@ -31,7 +31,7 @@
 		);
 
 		$actual: json-encode($map);
-		$expected: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23457px"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
+		$expected: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23457px","1.23457dppx","1.23457deg"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
 
 		@include assert-equal($actual, $expected);
 	}
@@ -41,17 +41,17 @@
 
 	@include test('should convert JSON array to Sass list') {
 
-		$array: '[1,2,"3","4px","42%","1.23456789px",[4,5,6],{"foo":"bar baz"}]';
+		$array: '[1,2,"3","4px","42%","1.23456789px","1.23456789dppx","1.23456789deg",[4,5,6],{"foo":"bar baz"}]';
 
 		$actual: json-decode($array);
-		$expected: 1, 2, "3", 4px, 42%, 1.23456789px, (4,5,6), (foo: "bar baz");
+		$expected: 1, 2, "3", 4px, 42%, 1.23456789px, 1.23456789dppx, 1.23456789deg, (4,5,6), (foo: "bar baz");
 
 		@include assert-equal($actual, $expected);
 	}
 
 	@include test('should convert JSON object to Sass map') {
 
-		$object: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
+		$object: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23456789px","1.23456789dppx","1.23456789deg"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
 
 		$actual: json-decode($object);
 		$expected: (
@@ -62,7 +62,7 @@
 				foo: 11,
 				bar: 22,
 				baz: (
-					5, 4, 6, null, 1
+					5, 4, 6, null, 1, 1.23456789px, 1.23456789dppx, 1.23456789deg
 				),
 				bag: "foo bar"
 			),
