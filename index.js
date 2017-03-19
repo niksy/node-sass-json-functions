@@ -1,9 +1,9 @@
 'use strict';
 
-var sass = require('node-sass');
-var getJsonValueFromSassValue = require('./lib/sass-to-json').getJsonValueFromSassValue;
-var setJsonValueToSassValue = require('./lib/json-to-sass').setJsonValueToSassValue;
-var types = sass.types;
+const sass = require('node-sass');
+const getJsonValueFromSassValue = require('./lib/sass-to-json');
+const setJsonValueToSassValue = require('./lib/json-to-sass');
+const types = sass.types;
 
 /**
  * @param  {sass.types.*} value
@@ -12,8 +12,8 @@ var types = sass.types;
  * @return {sass.types.String}
  */
 function encode ( value, quotes ) {
-	var shouldQuote = quotes.getValue();
-	var resolvedValue = JSON.stringify(getJsonValueFromSassValue(value, { precision: this.options.precision }));
+	const shouldQuote = quotes.getValue();
+	let resolvedValue = JSON.stringify(getJsonValueFromSassValue(value, { precision: this.options.precision }));
 	if ( shouldQuote ) {
 		resolvedValue = `'${resolvedValue}'`;
 	}
@@ -26,7 +26,7 @@ function encode ( value, quotes ) {
  * @return {sass.types.*}
  */
 function decode ( value ) {
-	var resolvedValue = {};
+	let resolvedValue = {};
 	try {
 		resolvedValue = JSON.parse(value.getValue());
 	} catch ( e ) {
