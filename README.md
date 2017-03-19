@@ -138,7 +138,7 @@ String to decode (parse).
 MIT © [Ivan Nikolić](http://ivannikolic.com)
 
 [ci]: https://travis-ci.org/niksy/node-sass-json-functions
-[ci-img]: https://img.shields.io/travis/niksy/node-sass-json-functions.svg
+[ci-img]: https://travis-ci.org/niksy/node-sass-json-functions.svg?branch=master
 [node-sass]: https://github.com/sass/node-sass
 [sass-types]: https://github.com/sass/node-sass#functions--v300---experimental
 [sass-list]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#lists
