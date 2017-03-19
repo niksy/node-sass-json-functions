@@ -7,7 +7,7 @@
 		$list: 1, 2, "3", 4px, 42%, 1.23456789px, 1.23456789dppx, 1.23456789deg, (4,5,6), (foo: "bar baz");
 
 		$actual: json-encode($list);
-		$expected: '[1,2,"3","4px","42%","1.23457px","1.23457dppx","1.23457deg",[4,5,6],{"foo":"bar baz"}]';
+		$expected: '\'[1,2,"3","4px","42%","1.23457px","1.23457dppx","1.23457deg",[4,5,6],{"foo":"bar baz"}]\'';
 
 		@include assert-equal($actual, $expected);
 	}
@@ -31,7 +31,7 @@
 		);
 
 		$actual: json-encode($map);
-		$expected: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23457px","1.23457dppx","1.23457deg"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
+		$expected: '\'{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23457px","1.23457dppx","1.23457deg"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}\'';
 
 		@include assert-equal($actual, $expected);
 	}
