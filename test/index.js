@@ -1,7 +1,10 @@
-var sassTrue = require('sass-true');
-var fn = require('../');
+import sassTrue from 'sass-true';
+import function_ from '../index';
 
-sassTrue.runSass({
-	file: './test/index.scss',
-	functions: Object.assign({}, fn)
-}, describe, it);
+sassTrue.runSass(
+	{
+		file: './test/index.scss',
+		functions: { ...function_ }
+	},
+	{ describe, it }
+);
