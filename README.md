@@ -2,34 +2,32 @@
 
 [![Build Status][ci-img]][ci]
 
-JSON encode and decode functions for [node-sass][node-sass].
+JSON encode and decode functions for [sass][sass].
 
 ## Install
 
 ```sh
-npm install node-sass-json-functions --save
+npm install sass node-sass-json-functions --save
 ```
 
 ## Usage
 
 ```js
-var sass = require('node-sass');
-var jsonFns = require('node-sass-json-functions');
+import sass from 'sass';
+import jsonFns from 'node-sass-json-functions';
 
 sass.render(
 	{
 		file: './index.scss',
-		functions: Object.assign({}, jsonFns)
+		functions: { ...jsonFns }
 	},
-	function (err, res) {
+	(err, res) => {
 		// ...
 	}
 );
 ```
 
 Module exports object with prepared functions `json-encode` and `json-decode`.
-If you need functions as separate entities, they are available as static
-properties `encode` and `decode`.
 
 ### Encode
 
@@ -164,7 +162,7 @@ MIT © [Ivan Nikolić](http://ivannikolic.com)
 
 [ci]: https://travis-ci.org/niksy/node-sass-json-functions
 [ci-img]: https://travis-ci.org/niksy/node-sass-json-functions.svg?branch=master
-[node-sass]: https://github.com/sass/node-sass
+[sass]: https://github.com/sass/dart-sass
 [sass-types]: https://github.com/sass/node-sass#functions--v300---experimental
 [sass-list]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#lists
 [sass-map]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps

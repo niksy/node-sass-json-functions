@@ -4,6 +4,7 @@
 
 ### Changed
 
+-   Switch to Dart Sass
 -   Upgrade package
 
 ### Removed

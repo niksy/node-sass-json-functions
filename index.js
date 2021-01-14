@@ -1,4 +1,4 @@
-import sass from 'node-sass';
+import sass from 'sass';
 import getJsonValueFromSassValue from './lib/sass-to-json';
 import setJsonValueToSassValue from './lib/json-to-sass';
 
@@ -38,5 +38,3 @@ export default {
 	'json-encode($value, $quotes: true)': encode,
 	'json-decode($value)': decode
 };
-
-export { encode, decode };

@@ -1,4 +1,4 @@
-@import 'true';
+@use 'true' as *;
 
 @include test-module('json-encode') {
 

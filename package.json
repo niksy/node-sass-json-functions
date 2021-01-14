@@ -37,11 +37,13 @@
   },
   "dependencies": {
     "lodash": "^4.17.20",
-    "node-sass": "^5.0.0",
     "parse-color": "^1.0.0",
     "parse-css-dimension": "^1.1.0",
     "rgb-hex": "^3.0.0",
     "shorten-css-hex": "^1.1.0"
+  },
+  "peerDependencies": {
+    "sass": ">=1"
   },
   "devDependencies": {
     "changelog-verify": "^1.1.2",
@@ -66,7 +68,8 @@
     "nyc": "^15.1.0",
     "prettier": "^2.1.2",
     "rollup": "^2.32.1",
-    "sass-true": "^5.0.0",
+    "sass": "^1.32.4",
+    "sass-true": "^6.0.1",
     "version-changelog": "^3.1.1"
   },
   "engines": {
