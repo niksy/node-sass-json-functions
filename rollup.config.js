@@ -2,8 +2,6 @@
 
 const path = require('path');
 const { promises: fs } = require('fs');
-const { default: resolve } = require('@rollup/plugin-node-resolve');
-const commonjs = require('@rollup/plugin-commonjs');
 
 module.exports = {
 	input: 'index.js',
@@ -46,7 +44,6 @@ module.exports = {
 					}
 				}
 			};
-		})(),
-		resolve({ resolveOnly: ['lodash-es'] })
+		})()
 	]
 };

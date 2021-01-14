@@ -36,18 +36,17 @@
     "version": "version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md"
   },
   "dependencies": {
-    "lodash-es": "4.17.15",
+    "is-plain-obj": "^3.0.0",
     "parse-color": "^1.0.0",
     "parse-css-dimension": "^1.1.0",
     "rgb-hex": "^3.0.0",
+    "round-to": "^5.0.0",
     "shorten-css-hex": "^1.1.0"
   },
   "peerDependencies": {
     "sass": ">=1"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^17.0.0",
-    "@rollup/plugin-node-resolve": "^11.0.1",
     "changelog-verify": "^1.1.2",
     "eslint": "^7.11.0",
     "eslint-config-niksy": "^9.0.0",
