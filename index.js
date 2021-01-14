@@ -12,9 +12,7 @@ const types = sass.types;
  */
 function encode(value, quotes) {
 	const shouldQuote = quotes.getValue();
-	let resolvedValue = JSON.stringify(
-		getJsonValueFromSassValue(value, { precision: this.options.precision })
-	);
+	let resolvedValue = JSON.stringify(getJsonValueFromSassValue(value));
 	if (shouldQuote) {
 		resolvedValue = `'${resolvedValue}'`;
 	}

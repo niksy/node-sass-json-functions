@@ -32,7 +32,7 @@
     "postpublish": "GITHUB_TOKEN=$GITHUB_RELEASE_TOKEN github-release-from-changelog",
     "release": "np --no-release-draft",
     "test": "([[ -z $WATCH_TEST ]] && npm run lint || echo) && nyc mocha --require esm 'test/**/*.js' && nyc check-coverage",
-    "test:watch": "WATCH_TEST=1 nodemon --exec npm test",
+    "test:watch": "WATCH_TEST=1 nodemon --ext js,json,scss --exec npm test",
     "version": "version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md"
   },
   "dependencies": {
