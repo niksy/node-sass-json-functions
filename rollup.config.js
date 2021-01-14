@@ -2,48 +2,50 @@
 
 const path = require('path');
 const { promises: fs } = require('fs');
+const { default: resolve } = require('@rollup/plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
 
-module.exports = {
-	input: 'index.js',
-	output: [
-		{
+const packageType = (() => {
+	return {
+		name: 'package-type',
+		async writeBundle(output) {
+			let prefix, type;
+			if (output.file.includes('cjs/')) {
+				prefix = 'cjs';
+				type = 'commonjs';
+			} else if (output.file.includes('esm/')) {
+				prefix = 'esm';
+				type = 'module';
+			}
+			if (typeof prefix !== 'undefined') {
+				const package_ = path.join(prefix, 'package.json');
+				try {
+					await fs.unlink(package_);
+				} catch (error) {}
+				await fs.writeFile(package_, JSON.stringify({ type }), 'utf8');
+			}
+		}
+	};
+})();
+
+module.exports = [
+	{
+		input: 'index.js',
+		output: {
 			file: 'cjs/index.js',
 			format: 'cjs',
 			exports: 'auto',
 			sourcemap: true
 		},
-		{
+		plugins: [packageType, resolve({ resolveOnly: ['lodash-es'] })]
+	},
+	{
+		input: 'index.js',
+		output: {
 			file: 'esm/index.js',
 			format: 'esm',
 			sourcemap: true
-		}
-	],
-	plugins: [
-		(() => {
-			return {
-				name: 'package-type',
-				async writeBundle(output) {
-					let prefix, type;
-					if (output.file.includes('cjs/')) {
-						prefix = 'cjs';
-						type = 'commonjs';
-					} else if (output.file.includes('esm/')) {
-						prefix = 'esm';
-						type = 'module';
-					}
-					if (typeof prefix !== 'undefined') {
-						const package_ = path.join(prefix, 'package.json');
-						try {
-							await fs.unlink(package_);
-						} catch (error) {}
-						await fs.writeFile(
-							package_,
-							JSON.stringify({ type }),
-							'utf8'
-						);
-					}
-				}
-			};
-		})()
-	]
-};
+		},
+		plugins: [packageType]
+	}
+];
