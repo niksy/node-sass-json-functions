@@ -120,20 +120,22 @@ standard CSS values.
 
 #### data
 
-Type: `sass.types.*`
+Type:
+`sass.types.Null|sass.types.Number|sass.types.String|sass.types.Boolean|sass.types.Color|sass.types.List|sass.types.Map`
 
 Data to encode (stringify).
 
 #### quotes
 
-Type: `Boolean|sass.types.Boolean`  
+Type: `sass.types.Boolean`  
 Default: `true`
 
 Should output string be quoted with single quotes.
 
 ### json-decode(data)
 
-Returns: `sass.types.*`
+Returns:
+`sass.types.Null|sass.types.Number|sass.types.String|sass.types.Boolean|sass.types.Color|sass.types.List|sass.types.Map`
 
 Decodes (`JSON.parse`) string and returns one of [available Sass
 types][sass-types].
@@ -150,7 +152,7 @@ types][sass-types].
 
 #### data
 
-Type: `sass.types.String|sass.types.Number|sass.types.Boolean|sass.types.Null`
+Type: `sass.types.String`
 
 String to decode (parse).
 

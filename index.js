@@ -2,13 +2,21 @@ import sass from 'sass';
 import getJsonValueFromSassValue from './lib/sass-to-json';
 import setJsonValueToSassValue from './lib/json-to-sass';
 
-const types = sass.types;
+/**
+ * @typedef {sass.types.Null|sass.types.Number|sass.types.String|sass.types.Boolean|sass.types.Color|sass.types.List|sass.types.Map} SassType
+ */
+/**
+ * @typedef {JsonPrimitive | JsonObject | JsonArray} JsonValue
+ * @typedef {JsonValue[]} JsonArray
+ * @typedef {string | number | boolean | null} JsonPrimitive
+ * @typedef {{[Key in string]?: JsonValue}} JsonObject
+ */
 
 /**
- * @param {sass.types.*} value
- * @param {boolean | sass.types.Boolean} quotes
+ * Encodes (`JSON.stringify`) data and returns Sass string. By default, string is quoted with single quotes so that it can be easily used in standard CSS values.
  *
- * @returns {sass.types.String}
+ * @param {SassType}           value  Data to encode (stringify).
+ * @param {sass.types.Boolean} quotes Should output string be quoted with single quotes.
  */
 function encode(value, quotes) {
 	const shouldQuote = quotes.getValue();
@@ -16,15 +24,16 @@ function encode(value, quotes) {
 	if (shouldQuote) {
 		resolvedValue = `'${resolvedValue}'`;
 	}
-	return new types.String(resolvedValue);
+	return new sass.types.String(resolvedValue);
 }
 
 /**
- * @param {sass.types.String|sass.types.Number|sass.types.Boolean|sass.types.Null} value
+ * Decodes (`JSON.parse`) string and returns one of available Sass types.
  *
- * @returns {sass.types.*}
+ * @param {sass.types.String} value String to decode (parse).
  */
 function decode(value) {
+	/** @type {JsonValue?} */
 	let resolvedValue = {};
 	try {
 		resolvedValue = JSON.parse(value.getValue());
@@ -34,7 +43,10 @@ function decode(value) {
 	return setJsonValueToSassValue(resolvedValue);
 }
 
-export default {
+/** @type {{ 'json-encode($value, $quotes: true)': typeof encode, 'json-decode($value)': typeof decode }} */
+const api = {
 	'json-encode($value, $quotes: true)': encode,
 	'json-decode($value)': decode
 };
+
+export default api;
