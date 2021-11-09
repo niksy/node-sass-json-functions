@@ -5,8 +5,8 @@ import setJsonValueToSassValue from './lib/json-to-sass';
 const types = sass.types;
 
 /**
- * @param  {sass.types.*} value
- * @param  {boolean | sass.types.Boolean} quotes
+ * @param {sass.types.*} value
+ * @param {boolean | sass.types.Boolean} quotes
  *
  * @returns {sass.types.String}
  */
@@ -20,7 +20,7 @@ function encode(value, quotes) {
 }
 
 /**
- * @param  {sass.types.String|sass.types.Number|sass.types.Boolean|sass.types.Null} value
+ * @param {sass.types.String|sass.types.Number|sass.types.Boolean|sass.types.Null} value
  *
  * @returns {sass.types.*}
  */
