@@ -2,6 +2,8 @@
 
 ## [Unreleased][]
 
+## [3.2.0][] - 2021-11-10
+
 ### Added
 
 -   TypeScript typings
@@ -28,3 +30,6 @@
 [unreleased]:
 	https://github.com/niksy/node-sass-json-functions/compare/v3.1.0...HEAD
 [3.1.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.1.0
+[unreleased]:
+	https://github.com/niksy/node-sass-json-functions/compare/v3.2.0...HEAD
+[3.2.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.2.0
