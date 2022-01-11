@@ -36,10 +36,9 @@
     "release": "np --no-release-draft",
     "test": "nyc mocha --require esm 'test/**/*.js' && nyc check-coverage",
     "test:watch": "nodemon --exec npm test",
-    "version": "if [ $(git rev-parse --abbrev-ref HEAD) == 'master' ]; then version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md; else echo; fi"
+    "version": "if [ $(git rev-parse --abbrev-ref HEAD) == 'master' ]; then sed -i '' '/\\[unreleased\\]:/d' CHANGELOG.md && version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md; else echo; fi"
   },
   "dependencies": {
-    "@types/sass": "^1.43.0",
     "is-plain-obj": "^3.0.0",
     "parse-color": "^1.0.0",
     "parse-css-dimension": "^1.1.0",
@@ -74,9 +73,9 @@
     "nyc": "^15.1.0",
     "prettier": "^2.4.0",
     "rollup": "^2.32.1",
-    "sass": "^1.32.4",
+    "sass": "^1.47.0",
     "sass-true": "^6.0.1",
-    "typescript": "^4.3.5",
+    "typescript": "^4.5.4",
     "version-changelog": "^3.1.1"
   },
   "peerDependencies": {

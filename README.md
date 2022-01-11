@@ -101,7 +101,7 @@ DEBUG: (foo: 1, bar: 2, 3, baz: 3 3 3, bad: (foo: 11, bar: 22, baz: 5, 4, 6, nul
 
 ## API
 
-### json-encode(data, [quotes])
+### json-encode(data[, quotes, precision])
 
 Returns: `sass.types.String`
 
@@ -131,6 +131,13 @@ Type: `sass.types.Boolean`
 Default: `true`
 
 Should output string be quoted with single quotes.
+
+#### precision
+
+Type: `sass.types.Number`  
+Default: `5`
+
+Number of digits after the decimal.
 
 ### json-decode(data)
 

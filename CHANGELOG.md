@@ -2,6 +2,11 @@
 
 ## [Unreleased][]
 
+### Added
+
+-   Precision option
+    ([#6](https://github.com/niksy/node-sass-json-functions/issues/6))
+
 ## [3.2.0][] - 2021-11-10
 
 ### Added
@@ -26,10 +31,12 @@
 -   **Node 4 support, lowest version is 10**
 -   Precision option
 
+<!-- prettier-ignore-start -->
+
 [3.0.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.0.0
-[unreleased]:
-	https://github.com/niksy/node-sass-json-functions/compare/v3.1.0...HEAD
+[unreleased]: https://github.com/niksy/node-sass-json-functions/compare/v3.1.0...HEAD
 [3.1.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.1.0
-[unreleased]:
-	https://github.com/niksy/node-sass-json-functions/compare/v3.2.0...HEAD
+[unreleased]: https://github.com/niksy/node-sass-json-functions/compare/v3.2.0...HEAD
 [3.2.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.2.0
+
+<!-- prettier-ignore-end -->
