@@ -12,15 +12,12 @@ import setJsonValueToSassValue from './lib/json-to-sass.js';
 /**
  * Encodes (`JSON.stringify`) data and returns Sass string. By default, string is quoted with single quotes so that it can be easily used in standard CSS values.
  *
- * @param {sass.LegacyValue}   value     Data to encode (stringify).
- * @param {sass.types.Boolean} quotes    Should output string be quoted with single quotes.
- * @param {sass.types.Number}  precision Number of digits after the decimal.
+ * @param {sass.LegacyValue}   value  Data to encode (stringify).
+ * @param {sass.types.Boolean} quotes Should output string be quoted with single quotes.
  */
-function encode(value, quotes, precision) {
+function encode(value, quotes) {
 	const shouldQuote = quotes.getValue();
-	let resolvedValue = JSON.stringify(
-		getJsonValueFromSassValue(value, { precision: precision.getValue() })
-	);
+	let resolvedValue = JSON.stringify(getJsonValueFromSassValue(value));
 	if (shouldQuote) {
 		resolvedValue = `'${resolvedValue}'`;
 	}
@@ -43,9 +40,9 @@ function decode(value) {
 	return setJsonValueToSassValue(resolvedValue);
 }
 
-/** @type {{ 'json-encode($value, $quotes: true, $precision: 5)': typeof encode, 'json-decode($value)': typeof decode }} */
+/** @type {{ 'json-encode($value, $quotes: true)': typeof encode, 'json-decode($value)': typeof decode }} */
 const api = {
-	'json-encode($value, $quotes: true, $precision: 5)': encode,
+	'json-encode($value, $quotes: true)': encode,
 	'json-decode($value)': decode
 };
 
