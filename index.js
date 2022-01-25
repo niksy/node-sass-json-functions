@@ -1,6 +1,6 @@
 import sass from 'sass';
-import getJsonValueFromSassValue from './lib/sass-to-json';
-import setJsonValueToSassValue from './lib/json-to-sass';
+import getJsonValueFromSassValue from './lib/sass-to-json.js';
+import setJsonValueToSassValue from './lib/json-to-sass.js';
 
 /**
  * @typedef {JsonPrimitive | JsonObject | JsonArray} JsonValue
