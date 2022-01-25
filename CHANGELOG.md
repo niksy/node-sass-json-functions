@@ -2,6 +2,13 @@
 
 ## [Unreleased][]
 
+### Removed
+
+-   **Node 10 support, lowest version is 12.22**
+-   **Legacy Sass support, lowest version is 1.45**
+-   Precision option; Dart Sass defaults to a sufficiently high precision for
+    all existing browsers
+
 ## [3.3.0][] - 2022-01-11
 
 ### Added
