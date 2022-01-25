@@ -12,28 +12,37 @@ import setJsonValueToSassValue from './lib/json-to-sass.js';
 /**
  * Encodes (`JSON.stringify`) data and returns Sass string. By default, string is quoted with single quotes so that it can be easily used in standard CSS values.
  *
- * @param {sass.LegacyValue}   value  Data to encode (stringify).
- * @param {sass.types.Boolean} quotes Should output string be quoted with single quotes.
+ * First argument:  `sass.Value` - Data to encode (stringify).
+ *
+ * Second argument: `sass.SassBoolean` - Should output string be quoted with single quotes.
+ *
+ * @param {sass.Value[]} encodeArguments
  */
-function encode(value, quotes) {
-	const shouldQuote = quotes.getValue();
+function encode(encodeArguments) {
+	const [value, quotes_] = encodeArguments;
+	const quotes = quotes_.assertBoolean('quotes');
+	const shouldQuote = quotes.value;
 	let resolvedValue = JSON.stringify(getJsonValueFromSassValue(value));
 	if (shouldQuote) {
 		resolvedValue = `'${resolvedValue}'`;
 	}
-	return new sass.types.String(resolvedValue);
+	return new sass.SassString(resolvedValue);
 }
 
 /**
  * Decodes (`JSON.parse`) string and returns one of available Sass types.
  *
- * @param {sass.types.String} value String to decode (parse).
+ * First argument: `sass.SassString` - String to decode (parse).
+ *
+ * @param {sass.Value[]} decodeArguments
  */
-function decode(value) {
+function decode(decodeArguments) {
+	const [value_] = decodeArguments;
+	const value = value_.assertString('value');
 	/** @type {JsonValue?} */
 	let resolvedValue = {};
 	try {
-		resolvedValue = JSON.parse(value.getValue());
+		resolvedValue = JSON.parse(value.text);
 	} catch (error) {
 		resolvedValue = null;
 	}

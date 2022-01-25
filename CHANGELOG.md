@@ -2,6 +2,10 @@
 
 ## [Unreleased][]
 
+### Changed
+
+-   Use [new Sass API](https://sass-lang.com/documentation/js-api)
+
 ### Removed
 
 -   **Node 10 support, lowest version is 12.22**
