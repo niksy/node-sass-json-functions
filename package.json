@@ -29,7 +29,7 @@
     "build": "npm run fix-types --silent && rollup --config rollup.config.js",
     "lint": "eslint '{index,lib/**/*,test/**/*}.js'",
     "lint:types": "npm run fix-types --silent && tsc",
-    "fix-types": "TYPES=node_modules/@types/sass-true/index.d.ts; sed -i '' 's/{ Options }/{ LegacyOptions }/g' $TYPES; sed -i '' 's/: Options,/: LegacyOptions<\"sync\">,/g' $TYPES;",
+    "fix-types": "TYPES=node_modules/@types/sass-true/index.d.ts; sed -i.bak 's/{ Options }/{ LegacyOptions }/g' $TYPES; sed -i.bak 's/: Options,/: LegacyOptions<\"sync\">,/g' $TYPES;",
     "module-check": "node -e 'require(\"node-sass-json-functions\");' && node --input-type=module -e 'import \"node-sass-json-functions\";'",
     "prepublishOnly": "npm run build",
     "postpublish": "GITHUB_TOKEN=$GITHUB_RELEASE_TOKEN github-release-from-changelog",
