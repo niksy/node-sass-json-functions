@@ -19,10 +19,10 @@ import setJsonValueToSassValue from './lib/json-to-sass.js';
  * @param {sass.Value[]} encodeArguments
  */
 function encode(encodeArguments) {
-	const [value, quotes_] = encodeArguments;
+	const [data, quotes_] = encodeArguments;
 	const quotes = quotes_.assertBoolean('quotes');
 	const shouldQuote = quotes.value;
-	let resolvedValue = JSON.stringify(getJsonValueFromSassValue(value));
+	let resolvedValue = JSON.stringify(getJsonValueFromSassValue(data));
 	if (shouldQuote) {
 		resolvedValue = `'${resolvedValue}'`;
 	}
@@ -37,22 +37,22 @@ function encode(encodeArguments) {
  * @param {sass.Value[]} decodeArguments
  */
 function decode(decodeArguments) {
-	const [value_] = decodeArguments;
-	const value = value_.assertString('value');
+	const [string_] = decodeArguments;
+	const string = string_.assertString('string');
 	/** @type {JsonValue?} */
 	let resolvedValue = {};
 	try {
-		resolvedValue = JSON.parse(value.text);
+		resolvedValue = JSON.parse(string.text);
 	} catch (error) {
 		resolvedValue = null;
 	}
 	return setJsonValueToSassValue(resolvedValue);
 }
 
-/** @type {{ 'json-encode($value, $quotes: true)': typeof encode, 'json-decode($value)': typeof decode }} */
+/** @type {{ 'json-encode($data, $quotes: true)': typeof encode, 'json-decode($string)': typeof decode }} */
 const api = {
-	'json-encode($value, $quotes: true)': encode,
-	'json-decode($value)': decode
+	'json-encode($data, $quotes: true)': encode,
+	'json-decode($string)': decode
 };
 
 export default api;

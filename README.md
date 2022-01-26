@@ -16,15 +16,12 @@ npm install sass node-sass-json-functions --save
 import sass from 'sass';
 import jsonFns from 'node-sass-json-functions';
 
-sass.render(
-	{
-		file: './index.scss',
+(async () => {
+	const result = await sass.compileAsync('./index.scss', {
 		functions: { ...jsonFns }
-	},
-	(err, res) => {
-		// ...
-	}
-);
+	});
+	// ...
+})();
 ```
 
 Module exports object with prepared functions `json-encode` and `json-decode`.
@@ -103,7 +100,7 @@ DEBUG: (foo: 1, bar: 2, 3, baz: 3 3 3, bad: (foo: 11, bar: 22, baz: 5, 4, 6, nul
 
 ### json-encode(data[, quotes])
 
-Returns: `sass.types.String`
+Returns: `sass.SassString`
 
 Encodes (`JSON.stringify`) data and returns [Sass string][sass-string]. By
 default, string is quoted with single quotes so that it can be easily used in
@@ -115,27 +112,27 @@ standard CSS values.
     alpha value, otherwise they are transformed to hex value (and it’s shorther
     version if possible)
 -   [Sass strings][sass-string] are transformed to strings
--   Sass numbers are transformed to numbers
--   Sass null values and anything unresolved is transformed to null values
+-   [Sass numbers][sass-number] are transformed to numbers
+-   [Sass booleans][sass-boolean] are transformed to booleans
+-   [Sass null][sass-null] values and anything unresolved is transformed to null
+    values
 
 #### data
 
-Type:
-`sass.types.Null|sass.types.Number|sass.types.String|sass.types.Boolean|sass.types.Color|sass.types.List|sass.types.Map`
+Type: `sass.Value`
 
 Data to encode (stringify).
 
 #### quotes
 
-Type: `sass.types.Boolean`  
-Default: `true`
+Type: `sass.SassBoolean`  
+Default: `sass.sassTrue`
 
 Should output string be quoted with single quotes.
 
-### json-decode(data)
+### json-decode(string)
 
-Returns:
-`sass.types.Null|sass.types.Number|sass.types.String|sass.types.Boolean|sass.types.Color|sass.types.List|sass.types.Map`
+Returns: `sass.Value`
 
 Decodes (`JSON.parse`) string and returns one of [available Sass
 types][sass-types].
@@ -147,12 +144,14 @@ types][sass-types].
 -   Strings are transformed to Sass numbers with units if they can be properly
     parsed with [parse-css-dimension][parse-css-dimension], otherwise they are
     transformed to [Sass strings][sass-string]
--   Numbers are transformed to Sass numbers
--   Null values and anything unresolved is transformed to Sass null values
+-   Numbers are transformed to [Sass numbers][sass-number]
+-   Booleans are transformed to [Sass booleans][sass-boolean]
+-   Null values and anything unresolved is transformed to [Sass null][sass-null]
+    values
 
-#### data
+#### string
 
-Type: `sass.types.String`
+Type: `sass.SassString`
 
 String to decode (parse).
 
@@ -165,11 +164,14 @@ MIT © [Ivan Nikolić](http://ivannikolic.com)
 [ci]: https://github.com/niksy/node-sass-json-functions/actions?query=workflow%3ACI
 [ci-img]: https://github.com/niksy/node-sass-json-functions/workflows/CI/badge.svg?branch=master
 [sass]: https://github.com/sass/dart-sass
-[sass-types]: https://github.com/sass/node-sass#functions--v300---experimental
-[sass-list]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#lists
-[sass-map]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#maps
-[sass-color]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#colors
-[sass-string]: http://sass-lang.com/documentation/file.SASS_REFERENCE.html#sass-script-strings
+[sass-types]: https://sass-lang.com/documentation/js-api/classes/Value
+[sass-list]: https://sass-lang.com/documentation/values/lists
+[sass-map]: https://sass-lang.com/documentation/values/maps
+[sass-color]: https://sass-lang.com/documentation/values/colors
+[sass-number]: https://sass-lang.com/documentation/values/numbers
+[sass-string]: https://sass-lang.com/documentation/values/strings
+[sass-null]: https://sass-lang.com/documentation/values/null
+[sass-boolean]: https://sass-lang.com/documentation/values/booleans
 [parse-color]: https://github.com/substack/parse-color
 [parse-css-dimension]: https://github.com/jedmao/parse-css-dimension
 
