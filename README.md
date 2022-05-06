@@ -55,7 +55,10 @@ $map: (
 		bag: 'foo bar'
 	),
 	qux: rgba(255, 255, 255, 0.5),
-	corgle: red
+	corgle: red,
+	george: calc(42px + 42%),
+	lexi: calc(42px / 2),
+	oliver: calc(42px + 10px + 10px)
 );
 
 body {
@@ -73,7 +76,7 @@ body {
 	content: '[1,2,"3",[4,5,6],{"foo":"bar baz"}]';
 	content: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23457px"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
 	content: [1,2,"3",[4,5,6],{"foo":"bar baz"}];
-	content: {"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23457px"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"};
+	content: {"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23457px"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00","george":"calc(42px + 42%)","lexi":"21px","oliver":"62px"};
 }
 ```
 
@@ -83,7 +86,7 @@ Input:
 
 ```scss
 $array: '[1,2,"3",[4,5,6],{"foo":"bar baz"}]';
-$object: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23456789px"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00"}';
+$object: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23456789px"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00","george":"calc(42px + 42%)","lexi":"21px","oliver":"calc(42px + 10px + 10px)"}';
 
 @debug json-decode($array);
 @debug json-decode($object);
@@ -93,7 +96,7 @@ Output:
 
 ```sh
 DEBUG: 1, 2, 3, 4, 5, 6, (foo: bar baz)
-DEBUG: (foo: 1, bar: 2, 3, baz: 3 3 3, bad: (foo: 11, bar: 22, baz: 5, 4, 6, null, 1, 1.23456789px, bag: foo bar), qux: rgba(255, 255, 255, 0.5), corgle: red)
+DEBUG: (foo: 1, bar: 2, 3, baz: 3 3 3, bad: (foo: 11, bar: 22, baz: 5, 4, 6, null, 1, 1.23456789px, bag: foo bar), qux: rgba(255, 255, 255, 0.5), corgle: red, george: calc(42px + 42%), lexi: 21px, oliver: "calc(42px + 10px + 10px)")
 ```
 
 ## API
@@ -111,6 +114,8 @@ standard CSS values.
 -   [Sass colors][sass-color] are transformed to `rgba()` syntax if they have
     alpha value, otherwise they are transformed to hex value (and it’s shorther
     version if possible)
+-   [Sass calculations][sass-calculation] are transformed to values
+    corresponding to calculation result (string or number)
 -   [Sass strings][sass-string] are transformed to strings
 -   [Sass numbers][sass-number] are transformed to numbers
 -   [Sass booleans][sass-boolean] are transformed to booleans
@@ -141,6 +146,9 @@ types][sass-types].
 -   Objects are transformed to [Sass maps][sass-map]
 -   Anything properly parsed with [parse-color][parse-color] is transformed to
     [Sass color][sass-color]
+-   Calculations (`calc()` values) are transformed to [Sass
+    calculations][sass-calculation] for simple operations and to [Sass
+    strings][sass-string] for everything else
 -   Strings are transformed to Sass numbers with units if they can be properly
     parsed with [parse-css-dimension][parse-css-dimension], otherwise they are
     transformed to [Sass strings][sass-string]
@@ -172,6 +180,7 @@ MIT © [Ivan Nikolić](http://ivannikolic.com)
 [sass-string]: https://sass-lang.com/documentation/values/strings
 [sass-null]: https://sass-lang.com/documentation/values/null
 [sass-boolean]: https://sass-lang.com/documentation/values/booleans
+[sass-calculation]: https://sass-lang.com/documentation/values/calculations
 [parse-color]: https://github.com/substack/parse-color
 [parse-css-dimension]: https://github.com/jedmao/parse-css-dimension
 
