@@ -1,6 +1,6 @@
 {
   "name": "node-sass-json-functions",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "description": "JSON encode and decode functions for node-sass.",
   "license": "MIT",
   "author": "Ivan Nikolić <niksy5@gmail.com> (http://ivannikolic.com)",

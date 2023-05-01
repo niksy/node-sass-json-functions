@@ -2,6 +2,8 @@
 
 ## [Unreleased][]
 
+## [4.0.0][] - 2023-05-01
+
 ### Changed
 
 -   Use [new Sass API](https://sass-lang.com/documentation/js-api)
@@ -52,6 +54,9 @@
 
 <!-- prettier-ignore-end -->
 
-[unreleased]:
-	https://github.com/niksy/node-sass-json-functions/compare/v3.3.0...HEAD
+    https://github.com/niksy/node-sass-json-functions/compare/v3.3.0...HEAD
+
 [3.3.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.3.0
+[Unreleased]:
+	https://github.com/niksy/node-sass-json-functions/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.0
