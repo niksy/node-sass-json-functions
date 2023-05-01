@@ -11,7 +11,7 @@ const result = sass.compile('./test/index.scss', {
 
 const modules = parse(result.css);
 
-modules.forEach(({ module: _module, tests }) => {
+modules.forEach(({ module: _module, tests = [] }) => {
 	describe(_module, function () {
 		tests.forEach(({ test, assertions }) => {
 			it(test, function () {
