@@ -2,6 +2,10 @@
 
 ## [Unreleased][]
 
+### Fixed
+
+-   ES module import implementation
+
 ## [4.0.0][] - 2023-05-01
 
 ### Changed

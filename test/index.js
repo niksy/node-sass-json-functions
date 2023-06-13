@@ -1,5 +1,5 @@
 import assert from 'assert';
-import sass from 'sass';
+import * as sass from 'sass';
 import { parse } from 'sass-true';
 import function_ from '../index.js';
 

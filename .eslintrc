@@ -6,9 +6,10 @@
 		"eslint-config-nitpick/next",
 		"eslint-config-prettier"
 	],
-	"plugins": ["eslint-plugin-prettier"],
+	"plugins": ["eslint-plugin-prettier", "eslint-plugin-import"],
 	"rules": {
-		"prettier/prettier": 1
+		"prettier/prettier": 1,
+		"import/no-namespace": 0
 	},
 	"overrides": [
 		{

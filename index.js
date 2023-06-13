@@ -1,4 +1,4 @@
-import sass from 'sass';
+import * as sass from 'sass';
 import getJsonValueFromSassValue from './lib/sass-to-json.js';
 import setJsonValueToSassValue from './lib/json-to-sass.js';
 

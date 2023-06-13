@@ -13,7 +13,7 @@ npm install sass node-sass-json-functions --save
 ## Usage
 
 ```js
-import sass from 'sass';
+import * as sass from 'sass';
 import jsonFns from 'node-sass-json-functions';
 
 (async () => {
