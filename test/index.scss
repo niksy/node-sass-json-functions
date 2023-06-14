@@ -35,6 +35,15 @@
 
 		@include assert-equal($actual, $expected);
 	}
+
+	@include test('should convert Sass boolean values to JSON boolean values') {
+		@include assert-equal(json-encode(true), '\'true\'');
+		@include assert-equal(json-encode(false), '\'false\'');
+	}
+
+	@include test('should convert Sass null value to JSON null value') {
+		@include assert-equal(json-encode(null), '\'null\'');
+	}
 }
 
 @include test-module('json-decode') {
