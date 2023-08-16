@@ -2,6 +2,11 @@
 
 ## [Unreleased][]
 
+### Fixed
+
+-   Quoted strings for map keys
+    ([#9](https://github.com/niksy/node-sass-json-functions/issues/9))
+
 ## [4.0.1][] - 2023-06-13
 
 ### Fixed
@@ -57,16 +62,6 @@
 [3.0.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.0.0
 [3.1.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.1.0
 [3.2.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.2.0
-
-<!-- prettier-ignore-end -->
-
-    https://github.com/niksy/node-sass-json-functions/compare/v3.3.0...HEAD
-
 [3.3.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.3.0
-[Unreleased]:
-	https://github.com/niksy/node-sass-json-functions/compare/v4.0.1...HEAD
 [4.0.1]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.1
-
-    https://github.com/niksy/node-sass-json-functions/compare/v4.0.0...HEAD
-
 [4.0.0]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.0
