@@ -2,6 +2,8 @@
 
 ## [Unreleased][]
 
+## [4.0.2][] - 2023-08-16
+
 ### Fixed
 
 -   Quoted strings for map keys
@@ -65,3 +67,6 @@
 [3.3.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.3.0
 [4.0.1]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.1
 [4.0.0]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.0
+[Unreleased]:
+	https://github.com/niksy/node-sass-json-functions/compare/v4.0.2...HEAD
+[4.0.2]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.2
