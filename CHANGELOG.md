@@ -2,6 +2,11 @@
 
 ## [Unreleased][]
 
+### Changed
+
+-   Parse calc values to true values instead of null
+    ([#7](https://github.com/niksy/node-sass-json-functions/issues/7))
+
 ## [4.0.2][] - 2023-08-16
 
 ### Fixed
