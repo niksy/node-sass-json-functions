@@ -2,6 +2,8 @@
 
 ## [Unreleased][]
 
+## [4.1.0][] - 2023-09-20
+
 ### Changed
 
 -   Parse calc values to true values instead of null
@@ -73,5 +75,9 @@
 [4.0.1]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.1
 [4.0.0]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.0
 [Unreleased]:
-	https://github.com/niksy/node-sass-json-functions/compare/v4.0.2...HEAD
+	https://github.com/niksy/node-sass-json-functions/compare/v4.1.0...HEAD
+[4.1.0]: https://github.com/niksy/node-sass-json-functions/tree/v4.1.0
+
+    https://github.com/niksy/node-sass-json-functions/compare/v4.0.2...HEAD
+
 [4.0.2]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.2
