@@ -4,10 +4,10 @@
 
 	@include test('should convert Sass list to JSON array') {
 
-		$list: 1, 2, "3", 4px, 42%, 1.23456789px, 1.23456789dppx, 1.23456789deg, (4,5,6), (foo: "bar baz", "frankie": 42, "athena finn": "willow");
+		$list: 1, 2, "3", 4px, 42%, 1.23456789px, 1.23456789dppx, 1.23456789deg, (4,5,6), (foo: "bar baz", "frankie": 42, "athena finn": "willow"), (george: calc(42px + 42%)), (lexi: calc(42px / 2)), (oliver: calc(42px + 10px + 10px));
 
 		$actual: json-encode($list);
-		$expected: '\'[1,2,"3","4px","42%","1.23456789px","1.23456789dppx","1.23456789deg",[4,5,6],{"foo":"bar baz","frankie":42,"athena finn":"willow"}]\'';
+		$expected: '\'[1,2,"3","4px","42%","1.23456789px","1.23456789dppx","1.23456789deg",[4,5,6],{"foo":"bar baz","frankie":42,"athena finn":"willow"},{"george":"calc(42px + 42%)"},{"lexi":"21px"},{"oliver":"62px"}]\'';
 
 		@include assert-equal($actual, $expected);
 	}
@@ -29,11 +29,14 @@
 			qux: rgba(255,255,255,0.5),
 			corgle: red,
 			"frankie": 42,
-			"athena finn": "willow"
+			"athena finn": "willow",
+			george: calc(42px + 42%),
+			lexi: calc(42px / 2),
+			oliver: calc(42px + 10px + 10px)
 		);
 
 		$actual: json-encode($map);
-		$expected: '\'{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23456789px","1.23456789dppx","1.23456789deg"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00","frankie":42,"athena finn":"willow"}\'';
+		$expected: '\'{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23456789px","1.23456789dppx","1.23456789deg"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00","frankie":42,"athena finn":"willow","george":"calc(42px + 42%)","lexi":"21px","oliver":"62px"}\'';
 
 		@include assert-equal($actual, $expected);
 	}
@@ -46,23 +49,29 @@
 	@include test('should convert Sass null value to JSON null value') {
 		@include assert-equal(json-encode(null), '\'null\'');
 	}
+
+	@include test('should convert Sass calculation to JSON calculation string') {
+		@include assert-equal(json-encode((value: calc(42px + 42%))), '\'{"value":"calc(42px + 42%)"}\'');
+		@include assert-equal(json-encode(calc(42px / 2)), '\'"21px"\'');
+		@include assert-equal(json-encode(calc(42px + 10px + 10px)), '\'"62px"\'');
+	}
 }
 
 @include test-module('json-decode') {
 
 	@include test('should convert JSON array to Sass list') {
 
-		$array: '[1,2,"3","4px","42%","1.23456789px","1.23456789dppx","1.23456789deg",[4,5,6],{"foo":"bar baz","foo-foo":"bar baz"}]';
+		$array: '[1,2,"3","4px","42%","1.23456789px","1.23456789dppx","1.23456789deg",[4,5,6],{"foo":"bar baz","foo-foo":"bar baz"},{"george":"calc(42px + 42%)"},{"lexi":"21px"},{"oliver":"calc(42px + 10px + 10px)"}]';
 
 		$actual: json-decode($array);
-		$expected: 1, 2, "3", 4px, 42%, 1.23456789px, 1.23456789dppx, 1.23456789deg, (4,5,6), (foo: "bar baz", foo-foo: "bar baz");
+		$expected: 1, 2, "3", 4px, 42%, 1.23456789px, 1.23456789dppx, 1.23456789deg, (4,5,6), (foo: "bar baz", foo-foo: "bar baz"), (george: calc(42px + 42%)), (lexi: 21px), (oliver: "calc(42px + 10px + 10px)");
 
 		@include assert-equal($actual, $expected);
 	}
 
 	@include test('should convert JSON object to Sass map') {
 
-		$object: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23456789px","1.23456789dppx","1.23456789deg"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00","frankie":42,"athena finn":"willow"}';
+		$object: '{"foo":1,"bar":[2,3],"baz":"3 3 3","bad":{"foo":11,"bar":22,"baz":[5,4,6,null,1,"1.23456789px","1.23456789dppx","1.23456789deg"],"bag":"foo bar"},"qux":"rgba(255,255,255,0.5)","corgle":"#f00","frankie":42,"athena finn":"willow","george":"calc(42px + 42%)","lexi":"21px","oliver":"calc(42px + 10px + 10px)"}';
 
 		$actual: json-decode($object);
 		$expected: (
@@ -80,7 +89,10 @@
 			qux: rgba(255,255,255,0.5),
 			corgle: #f00,
 			frankie: 42,
-			"athena finn": "willow"
+			"athena finn": "willow",
+			george: calc(42px + 42%),
+			lexi: 21px,
+			oliver: "calc(42px + 10px + 10px)"
 		);
 
 		@include assert-equal($actual, $expected);
@@ -93,6 +105,12 @@
 
 	@include test('should convert JSON null value to Sass null value') {
 		@include assert-equal(json-decode('null'), null);
+	}
+
+	@include test('should convert JSON calculation string to Sass calculation') {
+		@include assert-equal(json-decode('{"value":"calc(42px + 42%)"}'), (value: calc(42px + 42%)));
+		@include assert-equal(json-decode('"calc(42px / 2)"'), 21px);
+		@include assert-equal(json-decode('"calc(42px + 10px + 10px)"'), "calc(42px + 10px + 10px)");
 	}
 }
 

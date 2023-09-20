@@ -35,7 +35,7 @@
     "prerelease": "npm run lint && npm run lint:types && npm run build && npm run module-check",
     "release": "np --no-release-draft",
     "test": "BABEL_ENV=test nyc mocha --require @babel/register --require esm 'test/**/*.js' && nyc check-coverage",
-    "test:watch": "nodemon --exec npm test",
+    "test:watch": "nodemon -e js,scss --exec npm test",
     "version": "if [ $(git rev-parse --abbrev-ref HEAD) == 'master' ]; then sed -i '' '/\\[unreleased\\]:/d' CHANGELOG.md && version-changelog CHANGELOG.md && changelog-verify CHANGELOG.md && git add CHANGELOG.md; else echo; fi"
   },
   "dependencies": {
@@ -43,6 +43,7 @@
     "is-plain-obj": "^3.0.0",
     "parse-color": "^1.0.0",
     "parse-css-dimension": "^1.1.0",
+    "postcss-values-parser": "^6.0.2",
     "rgb-hex": "^3.0.0",
     "round-to": "^5.0.0",
     "shorten-css-hex": "^1.1.0"
@@ -76,13 +77,13 @@
     "nyc": "^15.1.0",
     "prettier": "^2.4.0",
     "rollup": "^2.32.1",
-    "sass": "^1.47.0",
+    "sass": "^1.67.0",
     "sass-true": "^6.0.1",
     "typescript": "^4.3.5",
     "version-changelog": "^3.1.1"
   },
   "peerDependencies": {
-    "sass": ">=1.45"
+    "sass": ">=1.64"
   },
   "engines": {
     "node": ">=12.22"
