@@ -14,24 +14,27 @@ npm install sass node-sass-json-functions --save
 
 ```js
 import * as sass from 'sass';
-import jsonFns from 'node-sass-json-functions';
+import createJsonFunctions from 'node-sass-json-functions';
 
 (async () => {
 	const result = await sass.compileAsync('./index.scss', {
-		functions: { ...jsonFns }
+		functions: { ...createJsonFunctions(sass) }
 	});
 	// ...
 })();
 ```
 
-Module exports object with prepared functions `json-encode` and `json-decode`.
+Module exports a factory function. Pass Sass binary reference to get an object with prepared
+functions `json-encode` and `json-decode`.
 
 ### Encode
 
 Input:
 
 ```scss
-$list: 1, 2, '3', (4, 5, 6), (
+$list:
+	1, 2, '3', (4, 5, 6),
+	(
 		foo: 'bar baz'
 	);
 $map: (
@@ -105,22 +108,19 @@ DEBUG: (foo: 1, bar: 2, 3, baz: 3 3 3, bad: (foo: 11, bar: 22, baz: 5, 4, 6, nul
 
 Returns: `sass.SassString`
 
-Encodes (`JSON.stringify`) data and returns [Sass string][sass-string]. By
-default, string is quoted with single quotes so that it can be easily used in
-standard CSS values.
+Encodes (`JSON.stringify`) data and returns [Sass string][sass-string]. By default, string is quoted
+with single quotes so that it can be easily used in standard CSS values.
 
--   [Sass lists][sass-list] are transformed to arrays
--   [Sass maps][sass-map] are transformed to objects
--   [Sass colors][sass-color] are transformed to `rgba()` syntax if they have
-    alpha value, otherwise they are transformed to hex value (and it’s shorther
-    version if possible)
--   [Sass calculations][sass-calculation] are transformed to values
-    corresponding to calculation result (string or number)
--   [Sass strings][sass-string] are transformed to strings
--   [Sass numbers][sass-number] are transformed to numbers
--   [Sass booleans][sass-boolean] are transformed to booleans
--   [Sass null][sass-null] values and anything unresolved is transformed to null
-    values
+- [Sass lists][sass-list] are transformed to arrays
+- [Sass maps][sass-map] are transformed to objects
+- [Sass colors][sass-color] are transformed to `rgba()` syntax if they have alpha value, otherwise
+  they are transformed to hex value (and it’s shorther version if possible)
+- [Sass calculations][sass-calculation] are transformed to values corresponding to calculation
+  result (string or number)
+- [Sass strings][sass-string] are transformed to strings
+- [Sass numbers][sass-number] are transformed to numbers
+- [Sass booleans][sass-boolean] are transformed to booleans
+- [Sass null][sass-null] values and anything unresolved is transformed to null values
 
 #### data
 
@@ -139,23 +139,20 @@ Should output string be quoted with single quotes.
 
 Returns: `sass.Value`
 
-Decodes (`JSON.parse`) string and returns one of [available Sass
-types][sass-types].
+Decodes (`JSON.parse`) string and returns one of [available Sass types][sass-types].
 
--   Arrays are transformed to [Sass lists][sass-list]
--   Objects are transformed to [Sass maps][sass-map]
--   Anything properly parsed with [parse-color][parse-color] is transformed to
-    [Sass color][sass-color]
--   Calculations (`calc()` values) are transformed to [Sass
-    calculations][sass-calculation] for simple operations and to [Sass
-    strings][sass-string] for everything else
--   Strings are transformed to Sass numbers with units if they can be properly
-    parsed with [parse-css-dimension][parse-css-dimension], otherwise they are
-    transformed to [Sass strings][sass-string]
--   Numbers are transformed to [Sass numbers][sass-number]
--   Booleans are transformed to [Sass booleans][sass-boolean]
--   Null values and anything unresolved is transformed to [Sass null][sass-null]
-    values
+- Arrays are transformed to [Sass lists][sass-list]
+- Objects are transformed to [Sass maps][sass-map]
+- Anything properly parsed with [parse-color][parse-color] is transformed to [Sass
+  color][sass-color]
+- Calculations (`calc()` values) are transformed to [Sass calculations][sass-calculation] for simple
+  operations and to [Sass strings][sass-string] for everything else
+- Strings are transformed to Sass numbers with units if they can be properly parsed with
+  [parse-css-dimension][parse-css-dimension], otherwise they are transformed to [Sass
+  strings][sass-string]
+- Numbers are transformed to [Sass numbers][sass-number]
+- Booleans are transformed to [Sass booleans][sass-boolean]
+- Null values and anything unresolved is transformed to [Sass null][sass-null] values
 
 #### string
 
