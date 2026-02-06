@@ -1,8 +1,9 @@
-import * as sass from 'sass';
+import { SassString } from 'sass';
 import getJsonValueFromSassValue from './lib/sass-to-json.js';
 import setJsonValueToSassValue from './lib/json-to-sass.js';
 
 /**
+ * @typedef {typeof import('sass')} sass
  * @typedef {JsonPrimitive | JsonObject | JsonArray} JsonValue
  * @typedef {JsonValue[]} JsonArray
  * @typedef {string | number | boolean | null} JsonPrimitive
@@ -20,13 +21,13 @@ import setJsonValueToSassValue from './lib/json-to-sass.js';
  */
 function encode(encodeArguments) {
 	const [data, quotes_] = encodeArguments;
-	const quotes = quotes_.assertBoolean('quotes');
-	const shouldQuote = quotes.value;
+	const quotes = quotes_?.assertBoolean('quotes');
+	const shouldQuote = Boolean(quotes?.value);
 	let resolvedValue = JSON.stringify(getJsonValueFromSassValue(data));
 	if (shouldQuote) {
 		resolvedValue = `'${resolvedValue}'`;
 	}
-	return new sass.SassString(resolvedValue);
+	return new SassString(resolvedValue);
 }
 
 /**
@@ -38,11 +39,11 @@ function encode(encodeArguments) {
  */
 function decode(decodeArguments) {
 	const [string_] = decodeArguments;
-	const string = string_.assertString('string');
+	const string = string_?.assertString('string');
 	/** @type {JsonValue?} */
 	let resolvedValue = {};
 	try {
-		resolvedValue = JSON.parse(string.text);
+		resolvedValue = string ? JSON.parse(string.text) : null;
 	} catch (error) {
 		resolvedValue = null;
 	}
