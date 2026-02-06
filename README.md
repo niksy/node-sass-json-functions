@@ -170,7 +170,7 @@ MIT © [Ivan Nikolić](http://ivannikolic.com)
 <!-- prettier-ignore-start -->
 
 [ci]: https://github.com/niksy/node-sass-json-functions/actions?query=workflow%3ACI
-[ci-img]: https://github.com/niksy/node-sass-json-functions/workflows/CI/badge.svg?branch=master
+[ci-img]: https://github.com/niksy/node-sass-json-functions/actions/workflows/ci.yml/badge.svg?branch=master
 [sass]: https://github.com/sass/dart-sass
 [sass-types]: https://sass-lang.com/documentation/js-api/classes/Value
 [sass-list]: https://sass-lang.com/documentation/values/lists
