@@ -6,6 +6,7 @@ import function_ from '../index.js';
 const result = sass.compile('./test/index.scss', {
 	functions: { ...function_ },
 	loadPaths: ['node_modules'],
+	importers: [new sass.NodePackageImporter()],
 	logger: sass.Logger.silent
 });
 
