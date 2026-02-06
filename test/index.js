@@ -1,10 +1,10 @@
-import assert from 'assert';
+import assert from 'node:assert';
 import * as sass from 'sass';
 import { parse } from 'sass-true';
-import function_ from '../index.js';
+import createJsonFunctions from '../index.js';
 
 const result = sass.compile('./test/index.scss', {
-	functions: { ...function_ },
+	functions: { ...createJsonFunctions(sass) },
 	loadPaths: ['node_modules'],
 	importers: [new sass.NodePackageImporter()],
 	logger: sass.Logger.silent
