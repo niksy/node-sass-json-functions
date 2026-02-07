@@ -2,6 +2,10 @@ import createGetJsonValueFromSassValue from './lib/sass-to-json.js';
 import createSetJsonValueToSassValue from './lib/json-to-sass.js';
 
 /**
+ * @import {SassModule, Sass} from './lib/types.js'
+ */
+
+/**
  * @typedef {JsonPrimitive | JsonObject | JsonArray} JsonValue
  * @typedef {JsonValue[]} JsonArray
  * @typedef {string | number | boolean | null} JsonPrimitive
@@ -9,20 +13,15 @@ import createSetJsonValueToSassValue from './lib/json-to-sass.js';
  */
 
 /**
- * @param {typeof import('sass')} sass
+ * @param {SassModule} sass
  */
 export default function createJsonFunctions(sass) {
 	const getJsonValueFromSassValue = createGetJsonValueFromSassValue(sass);
 	const setJsonValueToSassValue = createSetJsonValueToSassValue(sass);
 
 	/**
-	 * Encodes (`JSON.stringify`) data and returns Sass string. By default, string is quoted with single quotes so that it can be easily used in standard CSS values.
-	 *
-	 * First argument:  `sass.Value` - Data to encode (stringify).
-	 *
-	 * Second argument: `sass.SassBoolean` - Should output string be quoted with single quotes.
-	 *
-	 * @param {import('sass').Value[]} encodeArguments
+	 * @param {Sass.Value[]} encodeArguments
+	 * @returns {Sass.SassString}
 	 */
 	function encode(encodeArguments) {
 		const [data, quotes_] = encodeArguments;
@@ -36,11 +35,8 @@ export default function createJsonFunctions(sass) {
 	}
 
 	/**
-	 * Decodes (`JSON.parse`) string and returns one of available Sass types.
-	 *
-	 * First argument: `sass.SassString` - String to decode (parse).
-	 *
-	 * @param {import('sass').Value[]} decodeArguments
+	 * @param {Sass.Value[]} decodeArguments
+	 * @returns {Sass.Value}
 	 */
 	function decode(decodeArguments) {
 		const [string_] = decodeArguments;
@@ -56,7 +52,18 @@ export default function createJsonFunctions(sass) {
 	}
 
 	return {
+		/**
+		 * Encodes (`JSON.stringify`) data and returns Sass string. By default, string is quoted with single quotes so that it can be easily used in standard CSS values.
+		 *
+		 * @param $data `sass.Value` - Data to encode (stringify).
+		 * @param $qoutes `sass.SassBoolean` - Should output string be quoted with single quotes.
+		 */
 		'json-encode($data, $quotes: true)': encode,
+		/**
+		 * Decodes (`JSON.parse`) string and returns one of available Sass types.
+		 *
+		 * @param $string `sass.SassString` - String to decode (parse).
+		 */
 		'json-decode($string)': decode
 	};
 }

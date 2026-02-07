@@ -75,7 +75,16 @@
     "version-changelog": "^3.1.1"
   },
   "peerDependencies": {
-    "sass": ">=1.64"
+    "sass": ">=1.97.3",
+    "sass-embedded": ">=1.97.3"
+  },
+  "peerDependenciesMeta": {
+    "sass": {
+      "optional": true
+    },
+    "sass-embedded": {
+      "optional": true
+    }
   },
   "engines": {
     "node": ">=18"

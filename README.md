@@ -2,18 +2,21 @@
 
 [![Build Status][ci-img]][ci]
 
-JSON encode and decode functions for [sass][sass].
+JSON encode and decode functions for [`sass` and `sass-embedded`][sass].
 
 ## Install
 
 ```sh
-npm install sass node-sass-json-functions --save
+npm install node-sass-json-functions --save
 ```
+
+`sass` and `sass-embedded` are optional peer dependencies so you need to install either of them
+separately.
 
 ## Usage
 
 ```js
-import * as sass from 'sass';
+import * as sass from 'sass'; // or `sass-embedded`
 import createJsonFunctions from 'node-sass-json-functions';
 
 (async () => {
@@ -24,8 +27,8 @@ import createJsonFunctions from 'node-sass-json-functions';
 })();
 ```
 
-Module exports a factory function. Pass Sass binary reference to get an object with prepared
-functions `json-encode` and `json-decode`.
+Module exports a factory function. Pass Sass or Sass Embedded binary reference to get an object with
+prepared functions `json-encode` and `json-decode`.
 
 ### Encode
 
