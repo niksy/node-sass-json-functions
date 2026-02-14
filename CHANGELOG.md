@@ -2,6 +2,10 @@
 
 ## [Unreleased][]
 
+### Fixed
+
+- Improve types for resolving installed Sass module
+
 ## [5.0.0][] - 2026-02-10
 
 ### Changed
@@ -86,6 +90,6 @@
 [5.0.0]: https://github.com/niksy/node-sass-json-functions/compare/v4.1.0...v5.0.0
 [4.1.0]: https://github.com/niksy/node-sass-json-functions/tree/v4.1.0
 
-    https://github.com/niksy/node-sass-json-functions/compare/v4.0.2...HEAD
+    	https://github.com/niksy/node-sass-json-functions/compare/v4.0.2...HEAD
 
 [4.0.2]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.2

@@ -62,4 +62,4 @@ export namespace Sass {
 }
 
 export type SassModule =
-	IsAny<SassEmbeddedPackageType> extends false ? SassEmbeddedPackageType : SassPackageType;
+	IsAny<SassEmbeddedPackage.Value> extends false ? SassEmbeddedPackageType : SassPackageType;
