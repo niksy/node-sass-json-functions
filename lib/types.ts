@@ -1,12 +1,11 @@
 // @ts-ignore `sass` may not be installed
+import * as sassClassic from "sass";
+// @ts-ignore `sass-embedded` may not be installed
+import * as sassEmbedded from "sass-embedded";
+// @ts-ignore `sass` may not be installed
 import type SassPackage from 'sass';
 // @ts-ignore `sass-embedded` may not be installed
 import type SassEmbeddedPackage from 'sass-embedded';
-
-// @ts-ignore `sass` may not be installed
-type SassPackageType = typeof import('sass');
-// @ts-ignore `sass-embedded` may not be installed
-type SassEmbeddedPackageType = typeof import('sass-embedded');
 
 type IsAny<T> = boolean extends (T extends never ? true : false) ? true : false;
 
@@ -62,4 +61,4 @@ export namespace Sass {
 }
 
 export type SassModule =
-	IsAny<SassEmbeddedPackage.Value> extends false ? SassEmbeddedPackageType : SassPackageType;
+	IsAny<SassEmbeddedPackage.Value> extends false ? typeof sassEmbedded : typeof sassClassic;
