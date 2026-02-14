@@ -2,6 +2,8 @@
 
 ## [Unreleased][]
 
+## [5.0.2][] - 2026-02-14
+
 ### Fixed
 
 - Apply additional type guards for dual Sass modules
@@ -92,7 +94,8 @@
 [3.3.0]: https://github.com/niksy/node-sass-json-functions/tree/v3.3.0
 [4.0.1]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.1
 [4.0.0]: https://github.com/niksy/node-sass-json-functions/tree/v4.0.0
-[Unreleased]: https://github.com/niksy/node-sass-json-functions/compare/v5.0.1...HEAD
+[Unreleased]: https://github.com/niksy/node-sass-json-functions/compare/v5.0.2...HEAD
+[5.0.2]: https://github.com/niksy/node-sass-json-functions/compare/v5.0.1...v5.0.2
 [5.0.1]: https://github.com/niksy/node-sass-json-functions/compare/v5.0.0...v5.0.1
 [5.0.0]: https://github.com/niksy/node-sass-json-functions/compare/v4.1.0...v5.0.0
 [4.1.0]: https://github.com/niksy/node-sass-json-functions/tree/v4.1.0
