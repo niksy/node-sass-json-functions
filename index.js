@@ -2,7 +2,7 @@ import createGetJsonValueFromSassValue from './lib/sass-to-json.js';
 import createSetJsonValueToSassValue from './lib/json-to-sass.js';
 
 /**
- * @import {SassModule, Sass} from './lib/types.js'
+ * @import {SassModule, Sass, SassCompilers} from './lib/types.js'
  */
 
 /**
@@ -13,11 +13,14 @@ import createSetJsonValueToSassValue from './lib/json-to-sass.js';
  */
 
 /**
- * @param {SassModule} sass
+ * Create Sass JSON encode and decode functions.
+ *
+ * @param {SassModule} sass          Sass module.
+ * @param {SassCompilers=} compilers Synchronous and asynchronous instances of Sass compiler.
  */
-export default function createJsonFunctions(sass) {
-	const getJsonValueFromSassValue = createGetJsonValueFromSassValue(sass);
-	const setJsonValueToSassValue = createSetJsonValueToSassValue(sass);
+export default function createJsonFunctions(sass, compilers) {
+	const getJsonValueFromSassValue = createGetJsonValueFromSassValue(sass, compilers);
+	const setJsonValueToSassValue = createSetJsonValueToSassValue(sass, compilers);
 
 	/**
 	 * @param {Sass.Value[]} encodeArguments

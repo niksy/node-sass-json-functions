@@ -62,3 +62,8 @@ export namespace Sass {
 
 export type SassModule =
 	IsAny<SassEmbeddedPackage.Value> extends false ? typeof sassEmbedded : typeof sassClassic;
+
+export type SassCompilers =
+		IsAny<SassEmbeddedPackage.Value> extends false
+			? [SassEmbeddedPackage.Compiler, SassEmbeddedPackage.AsyncCompiler]
+			: [SassPackage.Compiler, SassPackage.AsyncCompiler];

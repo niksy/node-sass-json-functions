@@ -30,6 +30,37 @@ import createJsonFunctions from 'node-sass-json-functions';
 Module exports a factory function. Pass Sass or Sass Embedded binary reference to get an object with
 prepared functions `json-encode` and `json-decode`.
 
+---
+
+You can optionally pass [sync](https://sass-lang.com/documentation/js-api/functions/initcompiler/)
+and [async](https://sass-lang.com/documentation/js-api/functions/initasynccompiler/) compiler
+instances so they can be used between compiles. This is useful when using `sass-embedded` so
+long-living subprocess can be reused. You will also need to take care of disposal when you’re done.
+
+<details>
+	<summary>Example</summary>
+
+```js
+import * as sass from 'sass'; // or `sass-embedded`
+import createJsonFunctions from 'node-sass-json-functions';
+
+(async () => {
+	const compiler = sass.initCompiler();
+	const compilerAsync = await sass.initAsyncCompiler();
+
+	const result = await compilerAsync.compileAsync('./index.scss', {
+		functions: { ...createJsonFunctions(sass, [compiler, compilerAsync]) }
+	});
+
+	compiler.dispose();
+	await compilerAsync.dispose();
+
+	// ...
+})();
+```
+
+</details>
+
 ### Encode
 
 Input:
